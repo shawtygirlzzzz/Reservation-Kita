@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    
+    
+        <h1>F4 </h1>
+        <h2>Login<img src="image/loginaccount.png" class="login-icon"></h2>
+        <form class="login-form" action="storeSearching.html" method="post">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required style="background-color: lightgrey;">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required style="background-color:lightgrey;">
+
+            <a href="#">Forgot Password?</a>
+
+            <div class="checkbox">
+                <input type="checkbox" id="remember">
+                <label for="remember">Remember me</label>
+            </div>
+
+            <button type="submit">Login</button>
+
+            <p>Doesn't have an account? <a href="register.html">Sign up here</a></p>
+        </form>
+        <div class="copyright">
+        <p>Copyright 2024 | F4</p>
+    </div>
+    <div class="illustration">
+        <img src="image/calendar.jpg" alt="Calendar Illustration">
+    </div>
+     <script>
+        function handleLogin(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            // You can add validation or authentication logic here if needed
+            window.location.href = "storesearchingpage.html"; // Redirect to the desired page
+        }
+    </script>
+</body>
+</html>  
