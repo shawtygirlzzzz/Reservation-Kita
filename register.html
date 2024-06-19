@@ -53,9 +53,9 @@
 
                 <div class="choose">
                     <div class="position">
-                        <label for="radioserviceprovider">
-                            <input type="radio" id="radioserviceprovider" name="servicetype" value="serviceprovider" onclick="selecttype(true)">
-                            Service Provider
+                        <label for="radiotailor">
+                            <input type="radio" id="radiotailor" name="servicetype" value="tailor" onclick="selecttype(true)">
+                            Tailor
                         </label>
                         
                         <label for="radiocustomer">
@@ -65,38 +65,13 @@
                     </div>                    
                    
                     <div class="select">
-                        <select id="servicetypeselection" name="servicetype" disabled onchange="selectservice()">
-                            <option value="" disabled selected>Types of services</option>
-                            <option value="medical">Medical</option>
-                            <option value="tailor">Tailor</option>
-                            <option value="spa">Spa</option>
-                        </select>
-                        <p></p>
-                        
                         <div id="tailorserviceprovided" style="display:none;">
                             <h4>Tailor Service Provided</h4>
                             <label><input type="checkbox" name="serviceprovided" value="repairsoralterations" disabled> Repairs/Alterations</label><br>
                             <label><input type="checkbox" name="serviceprovided" value="womencustommade" disabled> Women's Custom Made Tailoring</label><br>
                             <label><input type="checkbox" name="serviceprovided" value="mencustommade" disabled> Men's Custom Made Tailoring</label>
                         </div>
-
-                        <div id="spaserviceprovided" style="display:none;">
-                            <h4>Spa Service Provided</h4>
-                            <label><input type="checkbox" name="serviceprovided" value="facialtreatment" disabled> Facial Treatment</label><br>
-                            <label><input type="checkbox" name="serviceprovided" value="bodytreatment" disabled> Body Treatment</label><br>
-                            <label><input type="checkbox" name="serviceprovided" value="nailservices" disabled> Nail Services</label>
-                        </div>
-                
-                        <div id="medicalserviceprovided" style="display:none;">
-                            <h4>Medical Service Provided</h4>
-                            <label><input type="checkbox" name="serviceprovided" value="vaccinations" disabled> Vaccinations</label><br>
-                            <label><input type="checkbox" name="serviceprovided" value="labtesting" disabled> Laboratory Testing</label><br>
-                            <label><input type="checkbox" name="serviceprovided" value="screeningtreatment" disabled> Screening and Treatment</label><br>
-                            <label><input type="checkbox" name="serviceprovided" value="specializedtreatment" disabled> Specialized Treatment</label>
-                        </div>
                         
-                        <p></p>
-                        <input type="text" id="licensenumber" name="licensenumber" placeholder="License Number" disabled>
                         <p></p>
                         <input type="text" id="storename" name="storename" placeholder="Name of Store" disabled>
                         <p></p>
@@ -105,6 +80,16 @@
                         <p></p>
                         <small>Operating Hours (End Time)</small>
                         <input type="time" id="endtime" name="endtime" min="09:00" max="18:00" disabled>
+                        <br/>
+                        <p></p>
+                        <label for="qualificationproof">Proof of Qualifications (PDF, PNG, JPEG, JPG)</label>
+                        <input type="file" id="qualificationproof" name="qualificationproof" accept=".pdf, .png, .jpeg, .jpg" disabled>
+                        <p></p>
+                        <label for="qualificationdescription">Description of Proof of Qualifications</label>
+                        <div class="qualificationDesc">
+                        <textarea id="qualificationdescription" name="qualificationdescription" rows="3" disabled></textarea>
+                        </div>
+                        <p></p>
                     </div>
                 </div>
             </div>
@@ -125,54 +110,28 @@
                 }
             });
 
-            function selecttype(isServiceProvider) {
-                var type = document.getElementById("servicetypeselection");
-                var services = document.querySelectorAll('#tailorserviceprovided input, #spaserviceprovided input, #medicalserviceprovided input');
-                var license = document.getElementById("licensenumber");
+            function selecttype(isTailor) {
+                var services = document.querySelectorAll('#tailorserviceprovided input');
+                var qualificationProof = document.getElementById("qualificationproof");
+                var qualificationDescription = document.getElementById("qualificationdescription");
                 var name = document.getElementById("storename");
                 var start = document.getElementById("starttime");
                 var end = document.getElementById("endtime");
 
-                type.disabled = !isServiceProvider;
-                license.disabled = !isServiceProvider;
-                name.disabled = !isServiceProvider;
-                start.disabled = !isServiceProvider;
-                end.disabled = !isServiceProvider;
-
                 services.forEach(service => {
-                    service.disabled = true;
+                    service.disabled = !isTailor;
                 });
 
-                if (!isServiceProvider) {
+                qualificationProof.disabled = !isTailor;
+                qualificationDescription.disabled = !isTailor;
+                name.disabled = !isTailor;
+                start.disabled = !isTailor;
+                end.disabled = !isTailor;
+
+                if (!isTailor) {
                     document.getElementById("tailorserviceprovided").style.display = "none";
-                    document.getElementById("spaserviceprovided").style.display = "none";
-                    document.getElementById("medicalserviceprovided").style.display = "none";
-                }
-            }
-
-            function selectservice() {
-                var type = document.getElementById("servicetypeselection");
-                var tailorServices = document.getElementById("tailorserviceprovided");
-                var spaServices = document.getElementById("spaserviceprovided");
-                var medicalServices = document.getElementById("medicalserviceprovided");
-                var services = {
-                    "tailor": tailorServices,
-                    "spa": spaServices,
-                    "medical": medicalServices
-                };
-
-                for (var key in services) {
-                    services[key].style.display = "none";
-                    services[key].querySelectorAll('input').forEach(input => {
-                        input.disabled = true;
-                    });
-                }
-
-                if (type.value in services) {
-                    services[type.value].style.display = "block";
-                    services[type.value].querySelectorAll('input').forEach(input => {
-                        input.disabled = false;
-                    });
+                } else {
+                    document.getElementById("tailorserviceprovided").style.display = "block";
                 }
             }
 
