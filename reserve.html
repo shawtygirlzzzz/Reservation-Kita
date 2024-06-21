@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Form</title>
+<link rel="stylesheet" href="reservation.css">
+<script>
+  function updateServices() {
+    var serviceType = document.getElementById("popupServiceType").value;
+    var serviceCheckboxes = document.getElementById("popupServiceProvider");
+
+    serviceCheckboxes.innerHTML = ""; // Clear existing checkboxes
+
+    if (serviceType === "women") {
+      serviceCheckboxes.innerHTML += `
+        <label><input type="checkbox" name="serviceDetail" value="blouses" onclick="toggleNested('blousesOptions')"> Blouses</label><br>
+        <div id="blousesOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="blouse_kids"> Blouse Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="blouse_adults"> Blouse Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="salwar_suits" onclick="toggleNested('salwarSuitsOptions')"> Salwar Suits</label><br>
+        <div id="salwarSuitsOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="patiala_suit_kids"> Patiala Suit Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="patiala_suit_adults"> Patiala Suit Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="anarkali_suit_kids"> Anarkali Suit Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="anarkali_suit_adults"> Anarkali Suit Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="churidar_suit_kids"> Churidar Suit Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="churidar_suit_adults"> Churidar Suit Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="pant_suits" onclick="toggleNested('pantSuitsOptions')"> Pant Suits</label><br>
+        <div id="pantSuitsOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="pant_kids"> Pant Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="pant_adults"> Pant Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="skirts" onclick="toggleNested('skirtsOptions')"> Skirts</label><br>
+        <div id="skirtsOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="a_line_skirt_kids"> A-line Skirt Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="a_line_skirt_adults"> A-line Skirt Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="pencil_skirt_kids"> Pencil Skirt Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="pencil_skirt_adults"> Pencil Skirt Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="maxi_skirt_kids"> Maxi Skirt Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="maxi_skirt_adults"> Maxi Skirt Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="mini_skirt_kids"> Mini Skirt Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="mini_skirt_adults"> Mini Skirt Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="dresses" onclick="toggleNested('dressesOptions')"> Dresses</label><br>
+        <div id="dressesOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="evening_gowns_kids"> Evening Gowns Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="evening_gowns_adults"> Evening Gowns Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="cocktail_dresses_kids"> Cocktail Dresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="cocktail_dresses_adults"> Cocktail Dresses Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="maxi_dresses_kids"> Maxi Dresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="maxi_dresses_adults"> Maxi Dresses Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="midi_dresses_kids"> Midi Dresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="midi_dresses_adults"> Midi Dresses Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="mini_dresses_kids"> Mini Dresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="mini_dresses_adults"> Mini Dresses Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="jackets_and_coats" onclick="toggleNested('jacketsAndCoatsOptions')"> Jackets and Coats</label><br>
+        <div id="jacketsAndCoatsOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="blazers_kids"> Blazers Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="blazers_adults"> Blazers Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="trench_coats_kids"> Trench Coats Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="trench_coats_adults"> Trench Coats Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="winter_coats_kids"> Winter Coats Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="winter_coats_adults"> Winter Coats Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="traditional_wear" onclick="toggleNested('traditionalWearOptions')"> Traditional Wear</label><br>
+        <div id="traditionalWearOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="baju_kebaya_kids"> Baju Kebaya Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="baju_kebaya_adults"> Baju Kebaya Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="baju_kurung_moden_kids"> Baju Kurung Moden Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="baju_kurung_moden_adults"> Baju Kurung Moden Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="baju_kurung_kedah_kids"> Baju Kurung Kedah Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="baju_kurung_kedah_adults"> Baju Kurung Kedah Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="baju_kurung_pahang_kids"> Baju Kurung Pahang Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="baju_kurung_pahang_adults"> Baju Kurung Pahang Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="cheongsam_qipao_kids"> Cheongsam/Qipao Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="cheongsam_qipao_adults"> Cheongsam/Qipao Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="saree_blouses_kids"> Saree Blouses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="saree_blouses_adults"> Saree Blouses Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="lehenga_choli_kids"> Lehenga Choli Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="lehenga_choli_adults"> Lehenga Choli Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="saree_fall_pico" onclick="toggleNested('sareeFallPicoOptions')"> Saree Fall Pico</label><br>
+        <div id="sareeFallPicoOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="saree_fall_pico_kids"> Saree Fall Pico Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="saree_fall_pico_adults"> Saree Fall Pico Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="kaftans" onclick="toggleNested('kaftansOptions')"> Kaftans</label><br>
+        <div id="kaftansOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="kaftans_kids"> Kaftans Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="kaftans_adults"> Kaftans Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="tunic_tops" onclick="toggleNested('tunicTopsOptions')"> Tunic Tops</label><br>
+        <div id="tunicTopsOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="tunic_tops_kids"> Tunic Tops Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="tunic_tops_adults"> Tunic Tops Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="evening_and_bridal_wear" onclick="toggleNested('eveningAndBridalWearOptions')"> Evening and Bridal Wear</label><br>
+        <div id="eveningAndBridalWearOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="wedding_dresses"> Wedding Dresses</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="bridesmaid_dresses_kids"> Bridesmaid Dresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="bridesmaid_dresses_adults"> Bridesmaid Dresses Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="maternity_wear"> Maternity Wear</label><br>
+        <label><input type="checkbox" name="serviceDetail" value="sportswear_and_dancewear" onclick="toggleNested('sportswearAndDancewearOptions')"> Sportswear and Dancewear</label><br>
+        <div id="sportswearAndDancewearOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="sportswear_and_dancewear_kids"> Sportswear and Dancewear Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="sportswear_and_dancewear_adults"> Sportswear and Dancewear Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="other_dresses" onclick="toggleNested('otherDressesOptions')"> Other Dresses</label><br>
+        <div id="otherDressesOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="sundresses_kids"> Sundresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="sundresses_adults"> Sundresses Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="shift_dresses_kids"> Shift Dresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="shift_dresses_adults"> Shift Dresses Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="wrap_dresses_kids"> Wrap Dresses Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="wrap_dresses_adults"> Wrap Dresses Adults</label><br>
+        </div>`;
+    } else if (serviceType === "men") {
+      serviceCheckboxes.innerHTML += `
+        <label><input type="checkbox" name="serviceDetail" value="shirts" onclick="toggleNested('shirtsOptions')"><strong> Shirts</strong></label><br>
+        <div id="shirtsOptions" style="display:none;margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="dress_shirts_kids"> Dress Shirts Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="dress_shirts_adults"> Dress Shirts Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="casual_shirts_kids"> Casual Shirts Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="casual_shirts_adults"> Casual Shirts Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="pants" onclick="toggleNested('pantsOptions')"><strong> Pants</strong></label><br>
+        <div id="pantsOptions" style="display:none;margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="dress_pants_kids"> Dress Pants Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="dress_pants_adults"> Dress Pants Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="casual_pants_kids"> Casual Pants Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="casual_pants_adults"> Casual Pants Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="jeans_kids"> Jeans Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="jeans_adults"> Jeans Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="suits" onclick="toggleNested('suitsOptions')"><strong>Suits</strong></label><br>
+        <div id="suitsOptions" style="display:none;margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="two_piece_suits_kids"> Two-Piece Suits Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="two_piece_suits_adults"> Two-Piece Suits Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="three_piece_suits_kids"> Three-Piece Suits Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="three_piece_suits_adults"> Three-Piece Suits Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="tuxedos_kids"> Tuxedos Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="tuxedos_adults"> Tuxedos Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="traditional_wear" onclick="toggleNested('traditionalWearOptions')"><strong> Traditional Wear</strong></label><br>
+        <div id="traditionalWearOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="teluk_belanga_kids"> Baju Melayu Teluk Belanga Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="teluk_belanga_adults"> Baju Melayu Teluk Belanga Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="cekak_musang_kids"> Baju Melayu Cekak Musang Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="cekak_musang_adults"> Baju Melayu Cekak Musang Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="kurta_kids"> Kurta Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="kurta_adults"> Kurta Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="sherwani_kids"> Sherwani Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="sherwani_adults"> Sherwani Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="dhoti_kids"> Dhoti Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="dhoti_adults"> Dhoti Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="jubah_kids"> Jubah Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="jubah_adults"> Jubah Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="jackets_and_coats" onclick="toggleNested('jacketsAndCoatsOptions')"><strong> Jackets and Coats</strong></label><br>
+        <div id="jacketsAndCoatsOptions" style="display:none;margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="blazers_kids"> Blazers Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="blazers_adults"> Blazers Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="sport_coats_kids"> Sport Coats Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="sport_coats_adults"> Sport Coats Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="overcoats_kids"> Overcoats Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="overcoats_adults"> Overcoats Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="trench_coats_kids"> Trench Coats Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="trench_coats_adults"> Trench Coats Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="vests" onclick="toggleNested('vestsOptions')"> Vests</label><br>
+        <div id="vestsOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="waistcoats_kids"> Waistcoats Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="waistcoats_adults"> Waistcoats Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="casual_wear" onclick="toggleNested('casualWearOptions')"><strong>Casual Wear</strong></label><br>
+        <div id="casualWearOptions" style="display:none;margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="t_shirts_kids"> T-shirts Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="t_shirts_adults"> T-shirts Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="polo_shirts_kids"> Polo Shirts Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="polo_shirts_adults"> Polo Shirts Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="shorts_kids"> Shorts Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="shorts_adults"> Shorts Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="formal_wear" onclick="toggleNested('formalWearOptions')"><strong> Formal Wear</strong></label><br>
+        <div id="formalWearOptions" style="display:none;margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="dress_shirts_kids"> Dress Shirts Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="dress_shirts_adults"> Dress Shirts Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="tuxedos_kids"> Tuxedos Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="tuxedos_adults"> Tuxedos Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="tailcoats_kids"> Tailcoats Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="tailcoats_adults"> Tailcoats Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="outerwear" onclick="toggleNested('outerwearOptions')"><strong> Outerwear</strong></label><br>
+        <div id="outerwearOptions" style="display:none;margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="leather_jackets_kids"> Leather Jackets Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="leather_jackets_adults"> Leather Jackets Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="denim_jackets_kids"> Denim Jackets Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="denim_jackets_adults"> Denim Jackets Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="bomber_jackets_kids"> Bomber Jackets Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="bomber_jackets_adults"> Bomber Jackets Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="ethnic_wear" onclick="toggleNested('ethnicWearOptions')"><strong>Ethnic Wear</strong></label><br>
+        <div id="ethnicWearOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="kameez_kids"> Kameez Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="kameez_adults"> Kameez Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="achkan_kids"> Achkan Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="achkan_adults"> Achkan Adults</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="angarkha_kids"> Angarkha Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="angarkha_adults"> Angarkha Adults</label><br>
+        </div>`;
+    } else if (serviceType === "other") {
+      serviceCheckboxes.innerHTML += `
+        <label><input type="checkbox" name="serviceDetail" value="uniforms" onclick="toggleNested('uniformsOptions')"> Uniforms</label><br>
+        <div id="uniformsOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="uniforms_kids"> Uniforms Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="uniforms_adults"> Uniforms Adults</label><br>
+        </div>
+        <label><input type="checkbox" name="serviceDetail" value="costumes" onclick="toggleNested('costumesOptions')"> Costumes</label><br>
+        <div id="costumesOptions" style="display:none; margin-left: 20px;">
+          <label><input type="checkbox" name="serviceDetail" value="costumes_kids"> Costumes Kids</label><br>
+          <label><input type="checkbox" name="serviceDetail" value="costumes_adults"> Costumes Adults</label><br>
+        </div>`;
+    }
+  }
+
+  function toggleNested(id) {
+    var element = document.getElementById(id);
+    if (element.style.display === "none") {
+      element.style.display = "block";
+    } else {
+      element.style.display = "none";
+    }
+  }
+
+  function openPopup() {
+    document.getElementById('popupForm').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+  }
+
+  function closePopup() {
+    document.getElementById('popupForm').style.display = 'none';
+    document.querySelector('.overlay').style.display = 'none';
+  }
+
+  function saveDetails() {
+    var serviceType = document.getElementById("popupServiceType").value;
+    var serviceProviders = document.querySelectorAll('#popupServiceProvider input[name="serviceDetail"]:checked');
+    var specialInstruction = document.getElementById("popupSpecialInstruction").value;
+    var typeOfClothes = document.getElementById("typeOfClothes").value;
+    var height = document.getElementById("height").value;
+    var width = document.getElementById("width").value;
+    
+    if (!serviceType || !serviceProviders.length || !typeOfClothes || !height || !width) {
+      alert("Please fill out all required fields.");
+      return;
+    }
+
+    var newDetails = `<p>Service Type: ${serviceType}</p>
+                      <p>Service Providers: ${Array.from(serviceProviders).map(provider => provider.value).join(", ")}</p>
+                      <p>Type of Clothes: ${typeOfClothes}</p>
+                      <p>Estimated Height: ${height} cm</p>
+                      <p>Estimated Width: ${width} cm</p>`;
+                      
+    if (specialInstruction) {
+      newDetails += <p>Special Instruction: ${specialInstruction}</p>;
+    }
+
+    document.getElementById('reservationDetails').innerHTML = newDetails;
+    closePopup();
+    document.getElementById('bookNowButton').style.display = 'inline-block'; // Show the Book Now button
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById("popupServiceType").addEventListener("change", updateServices);
+  });
+</script>
+</head>
+<body>
+<div class="header">
+  <h1><a href="tailorProfile.html" class="back-arrow" aria-label="Go back">&larr;</a>F4</h1>
+  <nav>
+    <ul>
+      <li><a href="storeSearching.html">Stores</a></li>
+      <li style="color: red;"><a href="service.html" style="color: red;">Services</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+  </nav>
+  <div class="contact">
+    <a href="https://wa.me/qr/DMJ2DG5J7LDUF1">
+      <img src="image/whatsapp.png" alt="WhatsApp" style="height:20px; width:20px; margin-right:5px;">
+      +60103344971
+    </a>
+    <a href="login.html">
+      <img src="image/loginaccount.png" alt="Login" style="height:20px; width:20px; margin-left:5px;">
+    </a>
+  </div>
+</div>
+<div class="container">
+  <h2><center>Book Now!</center></h2>
+  <form action="payment.html" method="post">
+    <div class="form-group">
+      <label for="name">Name<span style="color: red;">*</span></label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="contact">Contact Number<span style="color: red;">*</span></label>
+      <input type="tel" id="contact" name="contact" required>
+    </div>
+    <div class="form-group">
+      <label for="date">Preferred Date<span style="color: red;">*</span></label>
+      <input type="date" id="date" name="date" required>
+    </div>
+    <div class="form-group">
+      <label for="time">Preferred Time<span style="color: red;">*</span></label>
+      <input type="time" id="time" name="time" required>
+    </div>
+    <div class="button-group">
+      <button type="button" class="button" onclick="openPopup()">Make a Clothes</button>
+      <button type="submit" class="button" id="bookNowButton" style="display:none;">Book Now</button>
+    </div>
+    <div id="reservationDetails"></div>
+  </form>
+</div>
+
+<div id="popupForm" style="display:none;">
+  <h3>Clothes Details</h3>
+  <label for="popupServiceType">Service Type</label>
+  <select id="popupServiceType" name="service" required>
+    <option value="">Select a service</option>
+    <option value="women">Women's Custom Made Tailoring</option>
+    <option value="men">Men's Custom Made Tailoring</option>
+    <option value="other">Other Custom Made Tailoring</option>
+  </select>
+  <label for="popupServiceProvider">Service Provider</label>
+  <div id="popupServiceProvider" class="service-provider"></div>
+  <label for="popupSpecialInstruction">Special Instruction</label>
+  <textarea id="popupSpecialInstruction"></textarea>
+  <label for="typeOfClothes">Type of Clothes</label>
+  <input type="text" id="typeOfClothes" required>
+  <label for="height">Estimated Height (cm)</label>
+  <input type="number" id="height" name="height" required>
+  <label for="width">Estimated Width (cm)</label>
+  <input type="number" id="width" name="width" required>
+  <div class="button-group">
+    <button type="button" class="button" onclick="saveDetails()">Save</button>
+    <button type="button" class="button" onclick="closePopup()">Cancel</button>
+  </div>
+</div>
+<div class="overlay" onclick="closePopup()" style="display:none;"></div>
+
+</body>
+</html>
