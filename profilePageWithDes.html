@@ -1,13 +1,16 @@
 <!DOCTYPE html>
+<?php include "connection.php"; ?>
 <html lang="en">
+  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="profilePageWithDes.css">
+    <link rel="stylesheet" href="rr.css"> <!-- Changed CSS -->
     <title>F4 Stores Services</title>
 </head>
 <body>
-    <header>
+    <main>
+            <header class="header">
             <h1>F4</h1>
         <nav>
             <a href="storeSearching.html"><button class="nav-button">Stores</button></a>
@@ -23,7 +26,6 @@
             </div>
         </div>
     </header>
-    <main>
         <div class="main-content">
             <div class="left-side">
                 <img src="Image/profilePicture.png" alt="Profile Picture" class="profile-pic">
@@ -33,20 +35,89 @@
                     <p id="address">7, Jalan Komersial TAKH 2, Taman Ayer Keroh Heights, 76450 Ayer Keroh Melaka</p>
                     <p><strong>Contact Number:</strong></p>
                     <p id="contactNo">+60123456789</p>
-                    <p><strong>Active:</strong> 14 minutes ago</p>
-                    <p><strong>Products:</strong> 4</p>
-                    <p><strong>Followers:</strong> 30</p>
-                    <p><strong>Following:</strong> 18</p>
-                    <p><strong>Rating:</strong> 4.5</p>
-                    <h3>Women’s Custom Made Tailoring:</h3>
-                    <p>Baju Kebaya</p>
-                    <p>Baju Kurung Moden</p>
-                    <p>Baju Kurung Kedah</p>
-                    <p>Baju Kurung Pahang</p>
-                    <button class="edit-profile-btn" onclick="edit()">Edit My Profile</button>
-                </div>
-            </div>
-        
+                    <p><strong>Service Provided:</strong></p>
+                    <p id="serviceProvided"></p>
+                    <!-- <p><strong>Price</strong></p>
+                    <p id="price"></p> -->
+                    <p><strong>Other Information:</strong></p>
+                    <p id="otherinfo"> </p>
+                    <p><strong>Please Upload Your Catalogue Here</strong><strong style="color:red;"> (JPG/JPEG/PNG FORMAT ONLY)</strong></p>
+                    <p id="otherinfo"> </p>
+
+                    <!-- UPLOAD PICTURE PHP -->
+                     	<style>
+                        body {
+                          display: center;
+                          justify-content: center;
+                          align-items: center;
+                          flex-wrap: wrap;
+                          min-height: 100vh;
+                        }
+                        .alb {
+                          width: 350px;
+                          height: 500px;
+                          padding: 5px;
+                        }
+                        .alb img {
+                          width: 350px;
+                          height: 500px;
+                        }
+                        a {
+                          text-decoration: none;
+                          color: black;
+                        }
+                      </style>
+                    </head>
+                    <body>
+                       
+                        <?php 
+                              $sql = "SELECT * FROM images ORDER BY id DESC";
+                              $res = mysqli_query($conn,  $sql);
+
+                              if (mysqli_num_rows($res) > 0) {
+                                while ($images = mysqli_fetch_assoc($res)) {  ?>
+                                
+                                <div class="alb">
+                                  <img src="uploads/<?=$images['image_url']?>">
+                                </div>
+                                  
+                        <?php } }?>
+                                        <style>
+                        body {
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          flex-direction: column;
+                          min-height: 100vh;
+                        }
+                      </style>
+                    </head>
+                    <body>
+                      <?php if (isset($_GET['error'])): ?>
+                        <p><?php echo $_GET['error']; ?></p>
+                      <?php endif ?> <!-- Upload.php should be taken too DON'T MISSED IT -->
+                        <form action="upload.php"  
+                              method="post"
+                              enctype="multipart/form-data">
+                              
+
+                              <input type="file" 
+                                      name="my_image">
+
+                              <input type="submit" 
+                              class="edit-profile-btn"
+                                      name="submit"
+                                      value="Upload">
+                             </form>
+
+                                        <button class="edit-profile-btn" onclick="edit()">Edit My Profile</button>
+                                    </div>
+                                </div>
+
+                                <head>
+                      <title>View</title>
+                                <!-- END UPLOAD PICTURE.PHP -->
+
             <div class="right-side">
                 <div class = "order-box">
                     <h3>The order has been <span class="completed">completed</span></h3>
@@ -89,35 +160,416 @@
                     <textarea id="newAddress" name="Address" rows="5"></textarea><br><br>
                     <label for="newContactNo">Contact Number:</label>
                     <input type="text" id="newContactNo" name="Contact Number"><br><br>
-                    <button type="button" onclick="save()">Save Changes</button>
-                    <button type="close" onclick="close()">Cancel</button>
+                    <script>
+                        function updateServices() {
+                            var serviceType = document.getElementById("service").value;
+                            var serviceCheckboxes = document.getElementById("service-checkboxes");
+                            
+                            serviceCheckboxes.innerHTML = ""; // Clear existing checkboxes
+                        
+                            if (serviceType === "women") {
+                                serviceCheckboxes.innerHTML += `
+                                 <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleBlouse()"><strong> Blouses</strong></label><br>
+                                    <div id="blouseOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Blouse Kids"> Blouse Kids</label> 
+                                      <label><input type="checkbox" name="serviceDetail" value="Blouse Adult"> Blouse Adults</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value=" " onclick="togglePencilSkirts()"><strong> Pencil Skirts</strong></label><br>
+                                    <div id="pencilSkirtsOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Pencil Skirt Kids"> Pencil Skirt Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Pencil Skirt Adults"> Pencil Skirt Adults</label><br>
+                                    </div>
+
+                                     <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleMiniSkirts()"><strong> Mini Skirts</strong></label><br>
+                                    <div id="miniSkirtsOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Mini Skirt Kids"> Mini Skirt Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Mini Skirt Adults"> Mini Skirt Adults</label><br>
+                                    </div>
+
+                                     <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleMaxiDresses()"><strong> Maxi Dresses</strong></label><br>
+                                    <div id="maxiDressesOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Maxi Dresses Kids"> Maxi Dresses Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Maxi Dresses Adults"> Maxi Dresses Adults</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleMiniDresses()"><strong> Mini Dresses</strong></label><br>
+                                    <div id="miniDressesOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Mini Dresses Kids"> Mini Dresses Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Maxi Dresses Adults"> Mini Dresses Adults</label><br>
+                                    </div>
+
+                                      <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleBajuKebaya()"><strong> Baju Kebaya</strong></label><br>
+                                    <div id="bajuKebayaOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Baju Kebaya Kids"> Baju Kebaya Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Baju Kebaya Adults"> Baju Kebaya Adults</label><br>
+                                    </div>
+
+                                        <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleBajuKurung()"><strong> Baju Kurung</strong></label><br>
+                                    <div id="bajuKurungOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Baju Kurung Kids"> Baju Kurung Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Baju Kurung Adults"> Baju Kurung Adults</label><br>
+                                    </div>
+
+                                        <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleCheongsamQipao()"><strong> Cheongsam/Qipao</strong></label><br>
+                                    <div id="cheongsamQipaoOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Cheongsam/Qipao Kids"> Cheongsam/Qipao Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Cheongsam/Qipao Adults"> Cheongsam/Qipao Adults</label><br>
+                                    </div>
+
+                                         <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleBlazers()"><strong> Blazers</strong></label><br>
+                                    <div id="blazersOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Blazers Kids"> Blazers Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Blazers Adults"> Blazers Adults</label><br>
+                                    </div>
+
+                                     <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleWinterCoats()"><strong> Winter Coats</strong></label><br>
+                                    <div id="winterCoatsOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Winter Coats Kids"> Winter Coats Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Winter Coats Adults"> Winter Coats Adults</label><br>
+                                    </div>
+
+                                      <label><input type="checkbox" name="serviceDetail" value=" " onclick="toggleSareeBlouses()"><strong> Saree Blouses</strong></label><br>
+                                    <div id="sareeBlousesOptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Saree Blouses Kids"> Saree Blouses Kids</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Saree Blouses Adults"> Saree Blouses Adults</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Maternity Wear"> Maternity Wear</label><br>
+                                `;
+                            } else if (serviceType === "men") {
+                                serviceCheckboxes.innerHTML += `
+                                    <label><input type="checkbox" name="serviceDetail" value="Shirts" onclick="toggleShirts()"><strong> Shirts</strong></label><br>
+                                    <div id="shirtsoptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Dress Shirts"> Dress Shirts</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Casual Shirts"> Casual Shirts</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Pants" onclick="togglePants()"><strong> Pants</strong></label><br>
+                                    <div id="pantsoptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Dress Pants"> Dress Pants</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Casual Pants"> Casual Pants</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Jeans"> Jeans</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Suits" onclick="toggleSuits()"><strong>Suits</strong></label><br>
+                                    <div id="suitsoptions" style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Two-Piece Suits"> Two-Piece Suits</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Three-Piece Suits"> Three-Piece Suits</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Tuxedos"> Tuxedos</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Traditional Wear" onclick="toggleTraditional()"><strong>Traditional Wear</strong></label><br>
+                                    <div id="traditionaloptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Teluk Belanga"> Baju Melayu Teluk Belanga</label><br>
+                                        <label><input type="checkbox" name="serviceDetail" value="Cekak Musang">Baju Melayu Cekak Musang</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Kurta"> Kurta</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Sherwani"> Sherwani</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Dhoti"> Dhoti</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Jubah"> Jubah</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Jacket and Coats" onclick="toggleJacket()"><strong> Jackets and Coats</strong></label><br>
+                                    <div id="jacketncoatoptions" style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Blazers"> Blazers</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Sport Coats"> Sport Coats</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Overcoats"> Overcoats</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Trench "> Trench Coats</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Vests"> Vests</label><br>
+                                    <div style="margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Waistcoats"> Waistcoats</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Casual Wear" onclick="toggleCasualwear()"><strong>Casual Wear</strong></label><br>
+                                    <div id="casualwearoptions"style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="T-shirts"> T-shirts</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Polo Shirts"> Polo Shirts</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Shorts"> Shorts</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Formal Wear" onclick="toggleFormalwear()"><strong> Formal Wear</strong></label><br>
+                                    <div id="formalwearoptions" style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Dress Shirts"> Dress Shirts</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Tuxedos"> Tuxedos</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Tailcoats"> Tailcoats</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Outerwear" onclick="toggleOuterwear()"><strong> Outerwear</strong></label><br>
+                                    <div id="outerwearoptions" style="display:none;margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Leather Jackets"> Leather Jackets</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Denim Jackets"> Denim Jackets</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Bomber Jackets"> Bomber Jackets</label><br>
+                                    </div>
+
+                                    <label><input type="checkbox" name="serviceDetail" value="Ethnic Wear" onclick="toggleEthnicWear()"> <strong>Ethnic Wear</strong></label><br>
+                                    <div id="ethnicWearOptions" style="display:none; margin-left: 20px;">
+                                      <label><input type="checkbox" name="serviceDetail" value="Kameez"> Kameez</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Achkan"> Achkan</label><br>
+                                      <label><input type="checkbox" name="serviceDetail" value="Angarkha"> Angarkha</label><br>
+                                    </div>`;
+                            
+                            } else if (serviceType === "other") {
+                                serviceCheckboxes.innerHTML += `
+                                    <label><input type="checkbox" name="serviceDetail" value="Uniforms"> Uniforms</label><br>
+                                    <label><input type="checkbox" name="serviceDetail" value="Costumes"> Costumes</label><br>`;
+                            }
+                        }
+                      
+                        //-----WOMEN TOGGLE-----
+                          function toggleBlouse() {
+                            var blouseOptions = document.getElementById("blouseOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function togglePencilSkirts() {
+                            var blouseOptions = document.getElementById("pencilSkirtsOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleMiniSkirts() {
+                            var blouseOptions = document.getElementById("miniSkirtsOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleMaxiDresses() {
+                            var blouseOptions = document.getElementById("maxiDressesOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleMiniDresses() {
+                            var blouseOptions = document.getElementById("miniDressesOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleBajuKebaya() {
+                            var blouseOptions = document.getElementById("bajuKebayaOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleBajuKurung() {
+                            var blouseOptions = document.getElementById("bajuKurungOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleCheongsamQipao() {
+                            var blouseOptions = document.getElementById("cheongsamQipaoOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleBlazers() {
+                            var blouseOptions = document.getElementById("blazersOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleWinterCoats() {
+                            var blouseOptions = document.getElementById("winterCoatsOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+                          function toggleSareeBlouses() {
+                            var blouseOptions = document.getElementById("sareeBlousesOptions");
+                            if (blouseOptions.style.display === "none") {
+                              blouseOptions.style.display = "block";
+                            } else {
+                              blouseOptions.style.display = "none";
+                            }
+                          }
+
+                          //------MAN TOGGLE-----
+                           function toggleEthnicWear() {
+                            var ethnicWearOptions = document.getElementById("ethnicWearOptions");
+                            if (ethnicWearOptions.style.display === "none") {
+                                ethnicWearOptions.style.display = "block";
+                            } else {
+                                ethnicWearOptions.style.display = "none";
+                            }
+                          }
+                            function toggleOuterwear() {
+                            var outerwearoptions = document.getElementById("outerwearoptions");
+                            if (outerwearoptions.style.display === "none") {
+                                outerwearoptions.style.display = "block";
+                            } else {
+                              outerwearoptions.style.display = "none";
+                            }
+                          }
+                      
+                          function toggleFormalwear() {
+                            var formalwearoptions = document.getElementById("formalwearoptions");
+                            if (formalwearoptions.style.display === "none") {
+                                formalwearoptions.style.display = "block";
+                            } else {
+                              formalwearoptions.style.display = "none";
+                            }
+                          }
+                      
+                          
+                          function toggleCasualwear() {
+                            var casualwearoptions = document.getElementById("casualwearoptions");
+                            if (casualwearoptions.style.display === "none") {
+                                casualwearoptions.style.display = "block";
+                            } else {
+                              casualwearoptions.style.display = "none";
+                            }
+                          }
+                      
+                          function toggleJacket() {
+                            var jacketncoatoptions = document.getElementById("jacketncoatoptions");
+                            if (jacketncoatoptions.style.display === "none") {
+                                jacketncoatoptions.style.display = "block";
+                            } else {
+                              jacketncoatoptions.style.display = "none";
+                            }
+                          }
+                      
+                          function toggleSuits() {
+                            var suitsoptions = document.getElementById("suitsoptions");
+                            if (suitsoptions.style.display === "none") {
+                                suitsoptions.style.display = "block";
+                            } else {
+                              suitsoptions.style.display = "none";
+                            }
+                          }
+                      
+                          function togglePants() {
+                            var pantsoptions= document.getElementById("pantsoptions");
+                            if (pantsoptions.style.display === "none") {
+                                pantsoptions.style.display = "block";
+                            } else {
+                              pantsoptions.style.display = "none";
+                            }
+                          }
+                      
+                          function toggleShirts() {
+                            var shirtsoptions= document.getElementById("shirtsoptions");
+                            if (shirtsoptions.style.display === "none") {
+                                shirtsoptions.style.display = "block";
+                            } else {
+                              shirtsoptions.style.display = "none";
+                            }
+                          }
+                      
+                          function toggleTraditional() {
+                            var traditionaloptions= document.getElementById("traditionaloptions");
+                            if (traditionaloptions.style.display === "none") {
+                                traditionaloptions.style.display = "block";
+                            } else {
+                              traditionaloptions.style.display = "none";
+                            }
+                          }
+                      
+                      
+                        
+                        document.addEventListener("DOMContentLoaded", function() {
+                            document.getElementById("service").addEventListener("change", updateServices);
+                        });
+                      </script>
+                      </head>
+                      <body>
+                      <div>
+                              <div class="form-group">
+                                <label for="newServiceProvided" id="servicetype">Service Provided:</label>
+                                  <label for="service">Service Type<span style="color: red;">*</span></label>
+                                  <select id="service" name="service" required>
+                                      <option value="">Select a service</option>
+                                      <option value="women">Women's custom made tailoring</option>
+                                      <option value="men">Men's custom made tailoring</option>
+                                      <option value="other">Other custom made tailoring</option>
+                                  </select>
+                              </div>
+                              <label for="serviceprovider">Service provider<span style="color:red;">*</span></label>
+                              <div id="service-checkboxes" class="form-group">
+                              </div>
+                              <label for="newOtherInfo">Other Information:</label>
+                              <input type="text" id="newOtherInfo" name="Other Information"><br><br>
+                              <button type="button" onclick="save()">Save Changes</button>
+                              <button type="close" onclick="close()">Cancel</button>
+                              <!-- <input type="submit" value="Confirm Reservation" class="button"> -->
+                          </form>
                 </form>
             </div>
         </div>
         
         <script>
             function edit() {
-                var popup = document.getElementById("editWindow");
-                popup.style.display = "block";
-            }
+            var editPopup = document.getElementById('editWindow');
+            editPopup.style.display = 'block';
 
-            function close() {
-                var popup = document.getElementById("editWindow");
-                popup.style.display = "none";
-            }
+            // Populate the form fields with current profile information
+            var currentName = document.getElementById('name').textContent;
+            document.getElementById('newName').value = currentName.trim(); // Trim to remove any leading/trailing whitespace
+            document.getElementById('newAddress').value = document.getElementById('address').textContent;
+            document.getElementById('newContactNo').value = document.getElementById('contactNo').textContent;
+        }
+
+             function close() { //OK
+            var editPopup = document.getElementById('editWindow');
+            editPopup.style.display = 'none';
+        }
 
             function save() {
-                var nName = document.getElementById("newName").value;
-                var nAddress = document.getElementById("newAddress").value;
-                var nContactNo = document.getElementById("newContactNo").value;
+               var nName = document.getElementById("newName").value;
+               var nAddress = document.getElementById("newAddress").value;
+               var nContactNo = document.getElementById("newContactNo").value;
+               var nOtherInfo = document.getElementById("newOtherInfo").value;
+               var serviceType = document.getElementById("service").value;
 
                 document.getElementById("name").innerHTML = nName;
                 document.getElementById("address").innerHTML = nAddress;
                 document.getElementById("contactNo").innerHTML = nContactNo;
+                document.getElementById("otherinfo").innerHTML = nOtherInfo;
+                document.getElementById("servicetype").innerHTML = serviceType;
+
+              
+
+                var serviceProvided = "";
+                var checkboxes = document.getElementsByName("serviceDetail");
+
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        serviceProvided += checkboxes[i].value + ", ";
+                    }
+                }
+                serviceProvided = serviceProvided.replace(/, $/, "");
+
+                document.getElementById("serviceProvided").innerHTML = serviceProvided;
 
                 close();
-            }
+                }
+
         </script>
     </main>
 </body>
+
 </html>
