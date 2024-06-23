@@ -62,6 +62,68 @@
         reservationTable.style.display = '';
       }
     }
+
+    function addRow() {
+      // Create a new row and cells
+      var table = document.getElementById('serviceProvidedTable').getElementsByTagName('tbody')[0];
+      var newRow = table.insertRow();
+
+      var cell1 = newRow.insertCell(0); // ServiceID
+      var cell2 = newRow.insertCell(1); // Name
+      var cell3 = newRow.insertCell(2); // Description
+      var cell4 = newRow.insertCell(3); // TypeID
+      var cell5 = newRow.insertCell(4); // Action
+
+      // Set placeholder values or create input elements
+      cell1.textContent = 'SPXXX'; // Example placeholder
+      cell2.textContent = 'New Service'; // Example placeholder
+      cell3.textContent = 'Description'; // Example placeholder
+      cell4.textContent = 'STXXX'; // Example placeholder
+
+      // Create action buttons
+      var addButton = document.createElement('button');
+      addButton.textContent = 'Add';
+      addButton.onclick = function() {
+        // Add logic to save the new row data
+        alert('Adding new row functionality to be implemented.');
+      };
+
+      var updateButton = document.createElement('button');
+      updateButton.textContent = 'Update';
+      updateButton.onclick = function() {
+        // Add logic to update the row data
+        alert('Updating row functionality to be implemented.');
+      };
+
+      var deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Delete';
+      deleteButton.onclick = function() {
+        // Remove the row from the table
+        table.deleteRow(newRow.rowIndex);
+        alert('Row deleted successfully.');
+      };
+
+      // Append buttons to the action cell
+      cell5.appendChild(addButton);
+      cell5.appendChild(updateButton);
+      cell5.appendChild(deleteButton);
+    }
+
+    function editRow(button) {
+      var row = button.parentNode.parentNode;
+      var cells = row.getElementsByTagName('td');
+
+      // Example: Populate modal with row data for editing
+      // Replace this with your actual editing logic
+      alert('Implement editing functionality.');
+    }
+
+    function deleteRow(button) {
+      var row = button.parentNode.parentNode;
+      var table = row.parentNode;
+      table.removeChild(row);
+      alert('Row deleted successfully.');
+    }
   </script>
 </head>
 <body>
@@ -252,6 +314,7 @@
           <th>Name</th>
           <th>Description</th>
           <th>TypeID</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -260,306 +323,561 @@
           <td>Blouses Kids</td>
           <td>Blouses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP002</td>
           <td>Blouses Adult</td>
           <td>Blouses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP003</td>
           <td>Pencil Skirt Kids</td>
           <td>Skirts</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP004</td>
           <td>Pencil Skirt Adult</td>
           <td>Skirts</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP005</td>
           <td>Mini Skirt Kids</td>
           <td>Skirts</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP006</td>
           <td>Mini Skirt Adult</td>
           <td>Skirts</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP007</td>
           <td>Maxi Dresses Kids</td>
           <td>Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP008</td>
           <td>Maxi Dresses Adult</td>
           <td>Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP009</td>
           <td>Mini Dresses Kids</td>
           <td>Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP010</td>
           <td>Mini Dresses Adult</td>
           <td>Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP011</td>
           <td>Baju Kebaya Kids</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP012</td>
           <td>Baju Kebaya Adult</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP013</td>
           <td>Baju Kurung (Moden, Kedah, Pahang) Kids</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP014</td>
           <td>Baju Kurung (Moden, Kedah, Pahang) Adult</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP015</td>
           <td>Cheongsam/Qipao Kids</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP016</td>
           <td>Cheongsam/Qipao Adult</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP017</td>
           <td>Saree Blouses Kids</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP018</td>
           <td>Saree Blouses Adult</td>
           <td>Traditional Dresses</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP019</td>
           <td>Blazers Kids</td>
           <td>Jackets and Coats</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP020</td>
           <td>Blazers Adult</td>
           <td>Jackets and Coats</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP021</td>
           <td>Winter Coats Kids</td>
           <td>Jackets and Coats</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP022</td>
           <td>Winter Coats Adult</td>
           <td>Jackets and Coats</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP023</td>
           <td>Maternity Wear</td>
           <td>Maternity Wear</td>
           <td>ST001</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP024</td>
           <td>Casual Shirts Kids</td>
           <td>Shirts</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP025</td>
           <td>Casual Shirts Adult</td>
           <td>Shirts</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP026</td>
           <td>Dress Pants Kids</td>
           <td>Pants</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP027</td>
           <td>Dress Pants Adult</td>
           <td>Pants</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP028</td>
           <td>Casual Pants Kids</td>
           <td>Pants</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP029</td>
           <td>Casual Pants Adult</td>
           <td>Pants</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP030</td>
           <td>Jeans Kids</td>
           <td>Pants</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP031</td>
           <td>Jeans Adult</td>
           <td>Pants</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP032</td>
           <td>Baju Melayu (Teluk Belanga, Cekak Musang) Kids</td>
           <td>Traditional Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP033</td>
           <td>Baju Melayu (Teluk Belanga, Cekak Musang) Adult</td>
           <td>Traditional Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP034</td>
           <td>Kurta Kids</td>
           <td>Traditional Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP035</td>
           <td>Kurta Adult</td>
           <td>Traditional Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP036</td>
           <td>Dhoti Kids</td>
           <td>Traditional Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP037</td>
           <td>Dhoti Adult</td>
           <td>Traditional Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP038</td>
           <td>Blazers Kids</td>
           <td>Jackets and Coats</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP039</td>
           <td>Blazers Adult</td>
           <td>Jackets and Coats</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP040</td>
           <td>Sport Coats Kids</td>
           <td>Jackets and Coats</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP041</td>
           <td>Sport Coats Adult</td>
           <td>Jackets and Coats</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP042</td>
           <td>T-shirts Kids</td>
           <td>Casual Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP043</td>
           <td>T-shirts Adult</td>
           <td>Casual Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP044</td>
           <td>Polo Shirts Kids</td>
           <td>Casual Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP045</td>
           <td>Polo Shirts Adult</td>
           <td>Casual Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP046</td>
           <td>Shorts Kids</td>
           <td>Casual Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP047</td>
           <td>Shorts Adult</td>
           <td>Casual Wear</td>
           <td>ST002</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP048</td>
           <td>Uniforms Kids</td>
           <td>Other Custom Clothing</td>
           <td>ST003</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP049</td>
           <td>Uniforms Adult</td>
           <td>Other Custom Clothing</td>
           <td>ST003</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP050</td>
           <td>Costumes Kids</td>
           <td>Other Custom Clothing</td>
           <td>ST003</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>SP051</td>
           <td>Costumes Adult</td>
           <td>Other Custom Clothing</td>
           <td>ST003</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -577,6 +895,7 @@
           <th>Status</th>
           <th>CUsername</th>
           <th>TUsername</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -591,6 +910,11 @@
           <td>In progress</td>
           <td>aliah</td>
           <td>tansiew</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>R002</td>
@@ -603,6 +927,11 @@
           <td>Completed</td>
           <td>lianpayne</td>
           <td>tansiew</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
         <tr>
           <td>R003</td>
@@ -615,6 +944,11 @@
           <td>Completed</td>
           <td>vashika</td>
           <td>ravikumar</td>
+          <td>
+            <button class="button" onclick="addRow(this)">Add</button>
+            <button class="button" onclick="editRow(this)">Update</button>
+            <button class="button" onclick="deleteRow(this)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
